@@ -50,7 +50,7 @@ dtable i.motivo_viaje2 i.grupo_edad i.sexo_pasajeros i.ocupacion,  by(motivo_via
 
 ***Regression Analysis
 mlogit motivo_viaje i.grupo_edad i.sexo_pasajeros i.ocupacion
-margins, dydx(*)
+margins, dydx(*) // verificar
 
 
 
