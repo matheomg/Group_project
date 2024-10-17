@@ -1,13 +1,13 @@
 use "C:\Users\alan_\OneDrive - Pontificia Universidad Católica del Ecuador\YFR\Intro_to_r\esi_2023.dta", clear
 
 * Recode mot_viam variable to a category format
-recode mot_viam (5 = 1) (1 2 3 4 = 2) (6 7 9 = 0), gen (motivo_viaje) 
+recode mot_viam (1 2 3 6 7 9 = 0) (4 5 = 1), gen (motivo_viaje) 
 label variable motivo_viaje "Motivo de viaje"
-label define viaje 1 "Residencia" 2 "Turismo y otras visitas" 0 "Transeuntes y tripulacion"
+label define viaje 0 "Ocacional" 1 "Permanente" 
 label values motivo_viaje viaje
 fre motivo_viaje
 
-/**************************************************************
+**************************************************************
 **                        PREDICTOR VARIABLE                 **
 **************************************************************/
 
@@ -40,8 +40,6 @@ fre ocupacion
 drop if ocupacion == .
 
 
-
-
 /**************************************************************
 **                          ANALYSES                          **
 **************************************************************/
@@ -51,8 +49,16 @@ clonevar motivo_viaje2 = motivo_viaje
 dtable i.motivo_viaje2 i.grupo_edad i.sexo_pasajeros i.ocupacion,  by(motivo_viaje,  tests) export(Descriptive Table.docx) replace 
 
 ***Regression Analysis
-mlogit motivo_viaje i.grupo_edad i.sexo_pasajeros i.ocupacion
-margins, dydx(*) // verificar
+logit motivo_viaje i.grupo_edad edad2 i.sexo_pasajeros i.ocupacion i.cont_res, or
+outreg2 using Reg1.doc, append label stnum(replace coef=exp(coef), replace se=coef*se)
+
+
+
+
+
+
+
+
 
 
 
