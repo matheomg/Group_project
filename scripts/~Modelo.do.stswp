@@ -40,8 +40,6 @@ fre ocupacion
 drop if ocupacion == .
 
 
-
-
 /**************************************************************
 **                          ANALYSES                          **
 **************************************************************/
@@ -51,7 +49,7 @@ clonevar motivo_viaje2 = motivo_viaje
 dtable i.motivo_viaje2 i.grupo_edad i.sexo_pasajeros i.ocupacion,  by(motivo_viaje,  tests) export(Descriptive Table.docx) replace 
 
 ***Regression Analysis
-mlogit motivo_viaje i.grupo_edad i.sexo_pasajeros i.ocupacion
+mlogit motivo_viaje i.grupo_edad edad2 i.sexo_pasajeros i.ocupacion i.cont_res i.via_tran
 margins, dydx(*) // verificar
 
 

@@ -1,5 +1,7 @@
 use "C:\Users\alan_\OneDrive - Pontificia Universidad Católica del Ecuador\YFR\Intro_to_r\esi_2023.dta", clear
 
+keep if tip_movi == 1 // filter to keep only people entering
+
 * Recode mot_viam variable to a category format
 recode mot_viam (1 2 3 6 7 9 = 0) (4 5 = 1), gen (motivo_viaje) 
 label variable motivo_viaje "Motivo de viaje"
@@ -49,8 +51,20 @@ clonevar motivo_viaje2 = motivo_viaje
 dtable i.motivo_viaje2 i.grupo_edad i.sexo_pasajeros i.ocupacion,  by(motivo_viaje,  tests) export(Descriptive Table.docx) replace 
 
 ***Regression Analysis
-logit motivo_viaje i.grupo_edad edad2 i.sexo_pasajeros i.ocupacion i.cont_res, or
-outreg2 using Reg1.doc, append label stnum(replace coef=exp(coef), replace se=coef*se)
+*logit motivo_viaje i.grupo_edad i.sexo_pasajeros i.ocupacion i.cont_res i.via_tran, or
+*outreg2 using Reg1.doc, append label stnum(replace coef=exp(coef), replace se=coef*se)
+
+
+logit motivo_viaje i.grupo_edad i.sexo_pasajeros i.ocupacion i.cont_res i.via_tran
+margins, dydx(*)
+
+probit motivo_viaje i.grupo_edad i.sexo_pasajeros i.ocupacion i.cont_res i.via_tran
+margins, dydx(*)
+
+
+marginsplot 
+
+
 
 
 
