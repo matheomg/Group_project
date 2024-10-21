@@ -20,6 +20,8 @@ label define grupo_edad_lbl 1 "0-17" 2 "18-39" 3 "40-64" 4 "65-107"
 label values grupo_edad grupo_edad_lbl
 fre grupo_edad
 
+gen edad2 = edad*edad
+
 * Gender
 * Recode gender variable to a binary format
 gen sexo_pasajeros = sex_migr
@@ -31,13 +33,11 @@ fre sexo_pasajeros
 
 * job occupation
 gen ocupacion = ocu_migr
-recode ocupacion (1111/1439 2111/2659 3111/3522 4110/4544 66666 = 1) (5111/5419 6110/6340 7111/7549 8111/8350 9111/9629 55555 = 2) (77777 = 3) (88888 = 4) (110 210 310 = 5) (393 99999 = .)
-label define categoria_ocu 1 "Directivos, profesionales y estudiantes" 2 "Operarios, Artesanos y Trabajadores Manuales" 3 "Jubilados y pensionistas" 4 "Menores de edad" 5 "Fuerzas armadas"
+recode ocupacion (1111/1439 2111/2659 3111/3522 4110/4544  110 210 310= 1) (5111/5419 6110/6340 7111/7549 8111/8350 9111/9629 55555 = 2) (77777 = 3) (88888 = 4) (66666 = 5) (393 99999 = .)
+label define categoria_ocu 1 "Profesionales" 2 "Técnicos" 3 "Jubilados" 4 "Menores de edad" 5 "Estudiantes"
 label values ocupacion categoria_ocu
 fre ocupacion
 drop if ocupacion == .
-
-
 
 
 /**************************************************************
@@ -49,7 +49,7 @@ clonevar motivo_viaje2 = motivo_viaje
 dtable i.motivo_viaje2 i.grupo_edad i.sexo_pasajeros i.ocupacion,  by(motivo_viaje,  tests) export(Descriptive Table.docx) replace 
 
 ***Regression Analysis
-mlogit motivo_viaje i.grupo_edad i.sexo_pasajeros i.ocupacion
+mlogit motivo_viaje i.grupo_edad edad2 i.sexo_pasajeros i.ocupacion i.cont_res i.via_tran
 margins, dydx(*) // verificar
 
 
