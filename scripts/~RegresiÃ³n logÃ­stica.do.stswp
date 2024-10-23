@@ -1,7 +1,7 @@
 use "C:\Users\alan_\OneDrive - Pontificia Universidad Católica del Ecuador\YFR\Intro_to_r\esi_2023.dta", clear
 
 keep if tip_movi == 1 // filter to keep only people entering
-keep if tip_naci == 2 // filter to keep only foreigners
+keep if tip_naci == 2
 
 * Recode mot_viam variable to a category format
 recode mot_viam (1 2 3 6 7 9 = 0) (4 5 = 1), gen (motivo_viaje) 
@@ -46,7 +46,7 @@ drop if ocupacion == .
 **                          DATA CLEAN                          **
 **************************************************************/
 *keep motivo_viaje edad grupo_edad sexo_pasajeros ocupacion cont_res via_tran 
-*save "C:\Users\alan_\OneDrive - Pontificia Universidad Católica del Ecuador\YFR\Intro_to_r\esi_2023_clean.dta", replace 
+*save "C:\Users\alan_\OneDrive - Pontificia Universidad Católica del Ecuador\YFR\Intro_to_r\esi_2023_clean.dta"
 
 
 /**************************************************************
