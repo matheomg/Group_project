@@ -5,3 +5,4 @@ https://puceeduec-my.sharepoint.com/:u:/g/personal/ammoralesg_puce_edu_ec/EQ0LTv
 https://puceeduec-my.sharepoint.com/:u:/g/personal/ammoralesg_puce_edu_ec/EYeRlLof_OFIlF8wpy1qSA0BLPBS5wg3FhWMqGPrSU5Y-Q?e=QHVcs5
 ## Research Question
 ### What demographic characteristics influence the likelihood that a foreigner chooses to enter Ecuador?
+
