@@ -2,6 +2,7 @@ use "C:\Users\alan_\OneDrive - Pontificia Universidad Católica del Ecuador\YFR\
 
 keep if tip_movi == 1 // filter to keep only people entering
 
+
 * Recode mot_viam variable to a category format
 recode mot_viam (1 2 3 6 7 9 = 0) (4 5 = 1), gen (motivo_viaje) 
 label variable motivo_viaje "Motivo de viaje"
@@ -40,6 +41,12 @@ label define categoria_ocu 1 "Profesionales" 2 "Técnicos" 3 "Jubilados" 4 "Meno
 label values ocupacion categoria_ocu
 fre ocupacion
 drop if ocupacion == .
+
+/**************************************************************
+**                          DATA CLEAN                          **
+**************************************************************/
+*keep motivo_viaje edad grupo_edad sexo_pasajeros ocupacion cont_res via_tran 
+*save "C:\Users\alan_\OneDrive - Pontificia Universidad Católica del Ecuador\YFR\Intro_to_r\esi_2023_clean.dta"
 
 
 /**************************************************************
